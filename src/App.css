@@ -57,9 +57,19 @@
   padding-left: 10px;
 }
 
+.container {
+  height: 100%;
+  margin-bottom: 50px;
+  padding-bottom: 50px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
 #containerInner {
   border: 1px solid #aaa;
   width: 420px;
+  padding-bottom: 30px;
 }
 
 #header {

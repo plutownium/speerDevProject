@@ -10,6 +10,7 @@ import "./App.css";
 
 function App() {
   const [cards, setCards] = useState([]);
+  const [showArchived, setShowArchived] = useState(false);
 
   useEffect(() => {
     console.log(13);
@@ -47,6 +48,12 @@ function App() {
                     created_at={card.created_at}
                     number={card.from}
                     recipient={card.from}
+                    status={card.is_archived}
+                    archiveCall={updateById}
+                    id={card.id}
+                    followUpCall={() => {
+                      getAll(setCards);
+                    }}
                   />
                 );
               })

@@ -1,55 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+
+import {
+  convertToMilitaryTime,
+  convertTwentyFourHourClockToTwelveHour,
+} from "../utility/time";
 
 // import Menu from "../img/menu.png";
 import Phone from "../img/phone.png";
 
 import "./Card.css";
 
-function convertTwentyFourHourClockToTwelveHour(militaryTime) {
-  let twelveHourVersion = "";
-  let hourPart = militaryTime.split(":")[0];
-  let asTwelveHourClock = parseInt(hourPart, 10);
-  if (asTwelveHourClock <= 12) {
-    console.log(true, asTwelveHourClock);
-    twelveHourVersion =
-      twelveHourVersion.toString() + "0" + asTwelveHourClock.toString();
-  } else {
-    console.log(16, asTwelveHourClock);
-    twelveHourVersion = asTwelveHourClock - 12;
-    twelveHourVersion = "0" + twelveHourVersion.toString();
-  }
-  let minutesString = militaryTime.split(":")[1];
-  twelveHourVersion = twelveHourVersion + ":" + minutesString;
-  console.log(
-    militaryTime,
-    hourPart,
-    asTwelveHourClock,
-    minutesString,
-    twelveHourVersion
-  );
-  let pm = "AM";
-  if (hourPart > 12) {
-    pm = "PM";
-  }
-  return [twelveHourVersion, pm];
-}
+function Card({
+  created_at,
+  number,
+  recipient,
+  status,
+  archiveCall,
+  id,
+  followUpCall,
+}) {
+  const [removed, setRemoved] = useState(false);
 
-function convertToMilitaryTime(created_at) {
-  return created_at
-    .split("T")[1]
-    .split(".")[0]
-    .split(":")
-    .slice(0, 2)
-    .join(":"); // yes I love a good one liner
-}
-
-function Card({ created_at, number, recipient }) {
   let date = created_at.split("T")[0];
   let timeCodeAs24HrClock = convertToMilitaryTime(created_at); // no bug at this point
   let timeCode = convertTwentyFourHourClockToTwelveHour(timeCodeAs24HrClock);
   // console.log(9, date, timeCode);
   return (
-    <div className="cardMainContainer">
+    <div
+      className={`cardMainContainer ${status ? "hideBecauseArchived" : ""} ${
+        removed ? "hideBecauseArchived" : ""
+      }`}
+    >
       <div className="headerContainer">
         <div className="headerInnerContainer dateContainer">
           <div className="dotMakerContainer">
@@ -65,7 +46,15 @@ function Card({ created_at, number, recipient }) {
           </div>
         </div>
       </div>
-      <div className="roundedBorderHighlight infoContainer">
+      <div
+        className="roundedBorderHighlight infoContainer"
+        onClick={() => {
+          console.log("removing id", id);
+          archiveCall(id);
+          followUpCall();
+          setRemoved(true);
+        }}
+      >
         <div className="flexBoxStandard infoContainerInner">
           <div className="leftContainer width100">
             <div className="iconContainer">

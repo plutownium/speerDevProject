@@ -32,6 +32,7 @@ export function getById(id) {
 }
 
 export function updateById(id) {
+  console.log("archiving...", id);
   const options = {
     method: "POST",
     headers: {
