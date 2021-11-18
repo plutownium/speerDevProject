@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import { getAll, getById, updateById } from "./utility/utility";
 
-import Card from "./components/Card";
+import Options from "./img/options.webp";
 
+import Card from "./components/Card";
 import "./App.css";
 
 function App() {
@@ -17,7 +18,22 @@ function App() {
   return (
     <div className="container">
       <div id="containerInner">
-        <div>foo</div>
+        <div className="headerContainer">
+          <div id="header">
+            <div>Activity</div>
+            <div>{/* intentionally blank */}</div>
+            <div>
+              <p className="headerText silentGreyText">Inbox</p>
+            </div>
+            <div>
+              <p className="headerText silentGreyText">All calls</p>
+            </div>
+            <div>
+              <img id="optionsImg" src={Options} alt="options" />
+            </div>
+          </div>
+          <div className="archiveBox">Archive all calls</div>
+        </div>
         <div className="container-view">
           {cards
             ? cards.map((card, index) => {

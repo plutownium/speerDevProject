@@ -8,18 +8,30 @@ import "./Card.css";
 function convertTwentyFourHourClockToTwelveHour(militaryTime) {
   let twelveHourVersion = "";
   let hourPart = militaryTime.split(":")[0];
-  let asTwelveHourClock = parseInt(hourPart, 10) - 12;
-  if (asTwelveHourClock <= 9) {
+  let asTwelveHourClock = parseInt(hourPart, 10);
+  if (asTwelveHourClock <= 12) {
+    console.log(true, asTwelveHourClock);
     twelveHourVersion =
       twelveHourVersion.toString() + "0" + asTwelveHourClock.toString();
   } else {
-    twelveHourVersion =
-      twelveHourVersion.toString() + asTwelveHourClock.toString();
+    console.log(16, asTwelveHourClock);
+    twelveHourVersion = asTwelveHourClock - 12;
+    twelveHourVersion = "0" + twelveHourVersion.toString();
   }
   let minutesString = militaryTime.split(":")[1];
   twelveHourVersion = twelveHourVersion + ":" + minutesString;
-  console.log(hourPart, asTwelveHourClock, minutesString, twelveHourVersion);
-  return twelveHourVersion;
+  console.log(
+    militaryTime,
+    hourPart,
+    asTwelveHourClock,
+    minutesString,
+    twelveHourVersion
+  );
+  let pm = "AM";
+  if (hourPart > 12) {
+    pm = "PM";
+  }
+  return [twelveHourVersion, pm];
 }
 
 function convertToMilitaryTime(created_at) {
@@ -65,12 +77,15 @@ function Card({ created_at, number, recipient }) {
                 <p className="boldFont">{number}</p>
               </div>
               <div className="width100">
-                <p>tried to call on {recipient}</p>
+                <p className="silentGreyText thinText">
+                  tried to call on {recipient}
+                </p>
               </div>
             </div>
           </div>
           <div className="timeContainer">
-            <div>{timeCode}</div>
+            <div className="silentGreyText">{timeCode[0]}</div>
+            <div className="ampmBox silentGreyText">{timeCode[1]}</div>
           </div>
         </div>
       </div>
