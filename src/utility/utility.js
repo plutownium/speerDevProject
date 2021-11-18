@@ -51,3 +51,27 @@ export function updateById(id) {
       console.log(err);
     });
 }
+
+export function resetAll(setCards) {
+  const url = "https://aircall-job.herokuapp.com/reset";
+  fetch(url, {
+    method: "get",
+    dataType: "json",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((success) => {
+      return success.json();
+    })
+    .then((data) => {
+      getAll(setCards);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}

@@ -14,10 +14,11 @@ function Card({
   created_at,
   number,
   recipient,
-  status,
+  archived,
   archiveCall,
   id,
   followUpCall,
+  showAll,
 }) {
   const [removed, setRemoved] = useState(false);
 
@@ -27,9 +28,9 @@ function Card({
   // console.log(9, date, timeCode);
   return (
     <div
-      className={`cardMainContainer ${status ? "hideBecauseArchived" : ""} ${
-        removed ? "hideBecauseArchived" : ""
-      }`}
+      className={`cardMainContainer ${
+        showAll ? "null" : archived ? "hideBecauseArchived" : ""
+      } ${removed ? "hideBecauseArchived" : ""}`}
     >
       <div className="cardHeaderContainer">
         <div className="headerInnerContainer flexPlainCenter">

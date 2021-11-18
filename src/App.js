@@ -13,7 +13,6 @@ function App() {
   const [showArchived, setShowArchived] = useState(false);
 
   useEffect(() => {
-    console.log(13);
     getAll(setCards);
   }, []);
 
@@ -24,17 +23,37 @@ function App() {
           <div id="header">
             <div>Activity</div>
             <div>{/* intentionally blank */}</div>
-            <div>
+            <div
+              onClick={() => {
+                setShowArchived(false);
+                console.log(showArchived, false, cards);
+              }}
+            >
               <p className="headerText silentGreyText">Inbox</p>
             </div>
-            <div>
+            <div
+              onClick={() => {
+                setShowArchived(true);
+                console.log(showArchived, true, cards);
+              }}
+            >
               <p className="headerText silentGreyText">All calls</p>
             </div>
             <div>
               <img id="optionsImg" src={Options} alt="options" />
             </div>
           </div>
-          <div id="archiveBox">
+          <div
+            id="archiveBox"
+            onClick={() => {
+              let updatedCards = [];
+              cards.forEach((card) => {
+                let archivedCard = (card.is_archived = true);
+                updatedCards.push(archivedCard);
+              });
+              setCards(updatedCards);
+            }}
+          >
             <img src={Hamburger} alt="box" />
             <p>Archive all calls</p>
           </div>
@@ -48,12 +67,13 @@ function App() {
                     created_at={card.created_at}
                     number={card.from}
                     recipient={card.from}
-                    status={card.is_archived}
+                    archived={card.is_archived}
                     archiveCall={updateById}
                     id={card.id}
                     followUpCall={() => {
                       getAll(setCards);
                     }}
+                    showAll={showArchived}
                   />
                 );
               })
