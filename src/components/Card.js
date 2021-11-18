@@ -32,7 +32,7 @@ function Card({
       }`}
     >
       <div className="headerContainer">
-        <div className="headerInnerContainer dateContainer">
+        <div className="headerInnerContainer flexPlainCenter">
           <div className="dotMakerContainer">
             <div></div>
             <div></div>
@@ -47,7 +47,7 @@ function Card({
         </div>
       </div>
       <div
-        className="roundedBorderHighlight infoContainer"
+        className="roundedBorderHighlight infoContainer flexSpaceBetween"
         onClick={() => {
           console.log("removing id", id);
           archiveCall(id);
@@ -55,7 +55,7 @@ function Card({
           setRemoved(true);
         }}
       >
-        <div className="flexBoxStandard infoContainerInner">
+        <div className="flexBoxStandard infoContainerInner infoContainer flexSpaceBetween">
           <div className="leftContainer width100">
             <div className="iconContainer">
               <img src={Phone} alt="phone" className="icon" />
@@ -72,9 +72,11 @@ function Card({
               </div>
             </div>
           </div>
-          <div className="timeContainer">
+          <div className="timeContainer flexSpaceBetween">
             <div className="silentGreyText">{timeCode[0]}</div>
-            <div className="ampmBox silentGreyText">{timeCode[1]}</div>
+            <div className="ampmBox flexPlainCenter silentGreyText">
+              {timeCode[1]}
+            </div>
           </div>
         </div>
       </div>
