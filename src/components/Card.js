@@ -18,10 +18,10 @@ function Card({
   archiveCall,
   id,
   followUpCall,
-  showAll,
+  showAllState,
 }) {
   const [removed, setRemoved] = useState(false);
-
+  console.log(24);
   let date = created_at.split("T")[0];
   let timeCodeAs24HrClock = convertToMilitaryTime(created_at); // no bug at this point
   let timeCode = convertTwentyFourHourClockToTwelveHour(timeCodeAs24HrClock);
@@ -29,7 +29,7 @@ function Card({
   return (
     <div
       className={`cardMainContainer ${
-        showAll ? "null" : archived ? "hideBecauseArchived" : ""
+        showAllState ? "null" : archived ? "hideBecauseArchived" : ""
       } ${removed ? "hideBecauseArchived" : ""}`}
     >
       <div className="cardHeaderContainer">
@@ -53,7 +53,7 @@ function Card({
           console.log("removing id", id);
           archiveCall(id);
           followUpCall();
-          setRemoved(true);
+          setRemoved(true); // removed because user clicked on Card to remove it
         }}
       >
         <div className="flexBoxStandard infoContainerInner flexSpaceBetween">

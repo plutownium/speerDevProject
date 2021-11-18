@@ -52,7 +52,7 @@ export function updateById(id) {
     });
 }
 
-export function resetAll(setCards) {
+export function resetAll(setCards, resetShowCards) {
   const url = "https://aircall-job.herokuapp.com/reset";
   fetch(url, {
     method: "get",

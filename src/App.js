@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { getAll, getById, updateById } from "./utility/utility";
+import { getAll, getById, updateById, resetAll } from "./utility/utility";
 
 import Options from "./img/options.webp";
 import Hamburger from "./img/hamburger.png";
@@ -10,11 +10,20 @@ import "./App.css";
 
 function App() {
   const [cards, setCards] = useState([]);
+  const [showCards, setShowCards] = useState([]); // showing arr of i
   const [showArchived, setShowArchived] = useState(false);
 
   useEffect(() => {
-    getAll(setCards);
+    resetAll(setCards);
   }, []);
+
+  function handleArchiveCall(item) {
+    var index = showCards.indexOf(item);
+    if (index !== -1) {
+      showCards.splice(item, 1);
+    }
+    setShowCards(showCards);
+  }
 
   return (
     <div className="container">
@@ -27,6 +36,7 @@ function App() {
               onClick={() => {
                 setShowArchived(false);
                 console.log(showArchived, false, cards);
+                // resetStates() // fixme: reset all Removed cards to nonRemoved after click Inbox
               }}
             >
               <p className="headerText silentGreyText">Inbox</p>
@@ -34,7 +44,7 @@ function App() {
             <div
               onClick={() => {
                 setShowArchived(true);
-                console.log(showArchived, true, cards);
+                console.log(showArchived, true, cards, showArchived);
               }}
             >
               <p className="headerText silentGreyText">All calls</p>
@@ -68,12 +78,14 @@ function App() {
                     number={card.from}
                     recipient={card.from}
                     archived={card.is_archived}
-                    archiveCall={updateById}
+                    archiveCall={() => {
+                      handleArchiveCall(index);
+                    }}
                     id={card.id}
                     followUpCall={() => {
                       getAll(setCards);
                     }}
-                    showAll={showArchived}
+                    showAllState={showArchived}
                   />
                 );
               })
