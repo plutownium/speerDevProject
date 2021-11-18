@@ -22,6 +22,10 @@ p {
   /* border: 3px solid darkorange; */
 }
 
+.cardHeaderContainer {
+  margin: 16px 0px 15px 0px;
+}
+
 .dateContainer {
   height: 40px;
 }

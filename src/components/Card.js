@@ -31,7 +31,7 @@ function Card({
         removed ? "hideBecauseArchived" : ""
       }`}
     >
-      <div className="headerContainer">
+      <div className="cardHeaderContainer">
         <div className="headerInnerContainer flexPlainCenter">
           <div className="dotMakerContainer">
             <div></div>
@@ -55,7 +55,7 @@ function Card({
           setRemoved(true);
         }}
       >
-        <div className="flexBoxStandard infoContainerInner infoContainer flexSpaceBetween">
+        <div className="flexBoxStandard infoContainerInner flexSpaceBetween">
           <div className="leftContainer width100">
             <div className="iconContainer">
               <img src={Phone} alt="phone" className="icon" />
