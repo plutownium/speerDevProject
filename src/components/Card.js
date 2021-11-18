@@ -8,14 +8,17 @@ import "./Card.css";
 function convertTwentyFourHourClockToTwelveHour(militaryTime) {
   let twelveHourVersion = "";
   let hourPart = militaryTime.split(":")[0];
-  let asTwelveHourClock = hourPart - 12;
+  let asTwelveHourClock = parseInt(hourPart, 10) - 12;
   if (asTwelveHourClock <= 9) {
-    twelveHourVersion = twelveHourVersion + "0" + asTwelveHourClock.toString();
+    twelveHourVersion =
+      twelveHourVersion.toString() + "0" + asTwelveHourClock.toString();
   } else {
-    twelveHourVersion = twelveHourVersion + asTwelveHourClock.toString();
+    twelveHourVersion =
+      twelveHourVersion.toString() + asTwelveHourClock.toString();
   }
-  let minutesString = twelveHourVersion + militaryTime.split(":")[1];
+  let minutesString = militaryTime.split(":")[1];
   twelveHourVersion = twelveHourVersion + ":" + minutesString;
+  console.log(hourPart, asTwelveHourClock, minutesString, twelveHourVersion);
   return twelveHourVersion;
 }
 
@@ -30,9 +33,9 @@ function convertToMilitaryTime(created_at) {
 
 function Card({ created_at, number, recipient }) {
   let date = created_at.split("T")[0];
-  let timeCodeAs24HrClock = convertToMilitaryTime(created_at);
+  let timeCodeAs24HrClock = convertToMilitaryTime(created_at); // no bug at this point
   let timeCode = convertTwentyFourHourClockToTwelveHour(timeCodeAs24HrClock);
-  console.log(9, date, timeCode);
+  // console.log(9, date, timeCode);
   return (
     <div className="cardMainContainer">
       <div className="headerContainer">
@@ -42,7 +45,7 @@ function Card({ created_at, number, recipient }) {
             <div></div>
           </div>
           <div className="dateContainerInner">
-            <p>{date}</p>
+            <p className="dateFont">{date}</p>
           </div>
           <div className="dotMakerContainer">
             <div></div>
@@ -53,13 +56,13 @@ function Card({ created_at, number, recipient }) {
       <div className="roundedBorderHighlight infoContainer">
         <div className="flexBoxStandard infoContainerInner">
           <div className="leftContainer width100">
-            <div>
+            <div className="iconContainer">
               <img src={Phone} alt="phone" className="icon" />
               {/* <img src={} alt="phone" /> */}
             </div>
             <div className="width100">
               <div>
-                <p>33 6 45 13 53 91</p>
+                <p className="boldFont">{number}</p>
               </div>
               <div className="width100">
                 <p>tried to call on {recipient}</p>
