@@ -1,3 +1,34 @@
+.cardMainContainer {
+  border: 3px dotted dodgerblue;
+  height: 105px;
+}
+
+.cardMainContainer > div {
+  /* border: 3px solid darkorange; */
+}
+
+.dateContainer {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dateContainerInner {
+  width: 120px;
+}
+
+.dateContainerInner p {
+  width: 120px;
+  text-align: center;
+}
+
+.dotMakerContainer {
+  border-top: 5px dotted #aaa;
+
+  width: 100%;
+}
+
 .flexBoxStandard {
   display: flex;
   flex-direction: row;
@@ -6,4 +37,23 @@
 .flexBoxColumn {
   display: flex;
   flex-direction: column;
+}
+
+.infoContainer {
+  margin: 0px 20px;
+  height: 64px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.timeContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
 }
