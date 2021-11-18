@@ -37,21 +37,24 @@
   }
 }
 
-.archiveBox {
+#archiveBox {
   border-left: 1px solid #aaa;
   border-right: 1px solid #aaa;
   border-bottom: 1px solid #aaa;
   height: 40px;
-  width: 90%;
+  width: 80%;
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
 }
 
-.container {
+#archiveBox {
   /* border: 5px solid red; */
   display: flex;
   justify-content: center;
-  padding-top: 30px;
+  padding-left: 10px;
 }
 
 #containerInner {

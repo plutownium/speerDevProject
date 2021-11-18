@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getAll, getById, updateById } from "./utility/utility";
 
 import Options from "./img/options.webp";
+import Hamburger from "./img/hamburger.png";
 
 import Card from "./components/Card";
 import "./App.css";
@@ -32,7 +33,10 @@ function App() {
               <img id="optionsImg" src={Options} alt="options" />
             </div>
           </div>
-          <div className="archiveBox">Archive all calls</div>
+          <div id="archiveBox">
+            <img src={Hamburger} alt="box" />
+            <p>Archive all calls</p>
+          </div>
         </div>
         <div className="container-view">
           {cards
