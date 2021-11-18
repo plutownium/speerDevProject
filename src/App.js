@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 
 import { getAll, getById, updateById } from "./utility/utility";
 
-import Header from "./Header.jsx";
 import Card from "./components/Card";
+
 function App() {
   const [cards, setCards] = useState([]);
+
   useEffect(() => {
     console.log(13);
     getAll(setCards);
   }, []);
+
   return (
     <div className="container">
-      <Header />
+      <div>foo</div>
       <div className="container-view">
         {/* <Card/> */}
         {/* <Card/> */}
-        {cards.length > 0
+        {cards
           ? cards.map((card, index) => {
               return (
                 <Card

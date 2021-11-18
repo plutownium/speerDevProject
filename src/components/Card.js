@@ -6,6 +6,7 @@ import React from "react";
 function Card({ created_at, number, recipient }) {
   let date = created_at.split("T")[0];
   let timeCode = created_at.split("T")[1].split(".")[0];
+  console.log(9, date, timeCode);
   return (
     <div>
       <div className="headerContainer">
