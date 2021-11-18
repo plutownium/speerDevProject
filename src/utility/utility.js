@@ -1,8 +1,15 @@
 export function getAll(setCards) {
   const url = "https://aircall-job.herokuapp.com/activities";
-  fetch(url)
-    .then((response) => {
-      response.json();
+  fetch(url, {
+    method: "get",
+    dataType: "json",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((success) => {
+      return success.json();
     })
     .then((data) => {
       console.log(9, data);

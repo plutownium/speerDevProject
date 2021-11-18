@@ -23,9 +23,8 @@ function App() {
               return (
                 <Card
                   key={index}
-                  date={card.created_at}
+                  created_at={card.created_at}
                   number={card.from}
-                  timeCode={card.created_at}
                   recipient={card.from}
                 />
               );

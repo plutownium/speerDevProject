@@ -4,6 +4,7 @@ import React from "react";
 // import Phone from "../img/phone.png";
 
 function Card({ created_at, number, recipient }) {
+  console.log(8, created_at);
   let date = created_at.split("T")[0];
   let timeCode = created_at.split("T")[1].split(".")[0];
   console.log(9, date, timeCode);
