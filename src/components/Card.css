@@ -1,0 +1,9 @@
+.flexBoxStandard {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexBoxColumn {
+  display: flex;
+  flex-direction: column;
+}

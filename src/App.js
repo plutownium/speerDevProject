@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 
+import { getAll, getById, updateById } from "./utility/utility";
+
+import Header from "./Header.jsx";
+import Card from "./components/Card";
 function App() {
+  const [cards, setCards] = useState([]);
+  useEffect(() => {
+    console.log(13);
+    getAll(setCards);
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Header />
+      <div className="container-view">
+        {/* <Card/> */}
+        {/* <Card/> */}
+        {cards.length > 0
+          ? cards.map((card, index) => {
+              return (
+                <Card
+                  key={index}
+                  date={card.created_at}
+                  number={card.from}
+                  timeCode={card.created_at}
+                  recipient={card.from}
+                />
+              );
+            })
+          : null}
+      </div>
+      {/* <Footer/> */}
     </div>
   );
 }
 
 export default App;
+
+// import Footer from "./Footer.jsx";
