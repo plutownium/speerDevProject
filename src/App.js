@@ -10,14 +10,15 @@ import "./App.css";
 
 function App() {
   const [cards, setCards] = useState([]);
-  const [showCards, setShowCards] = useState([]); // showing arr of i
+  const [showCards, setShowCards] = useState([]); // showing arr of indexes as strings.
   const [showArchived, setShowArchived] = useState(false);
 
   useEffect(() => {
-    resetAll(setCards);
+    resetAll(setCards, setShowCards);
   }, []);
 
   function handleArchiveCall(item) {
+    // inputs like "1", "4", "6"
     var index = showCards.indexOf(item);
     if (index !== -1) {
       showCards.splice(item, 1);
@@ -71,13 +72,19 @@ function App() {
         <div className="container-view">
           {cards
             ? cards.map((card, index) => {
+                console.log(
+                  75,
+                  index,
+                  "archived:",
+                  showCards.includes(index.toString())
+                );
                 return (
                   <Card
                     key={index}
                     created_at={card.created_at}
                     number={card.from}
                     recipient={card.from}
-                    archived={card.is_archived}
+                    archived={showCards.includes(index.toString())}
                     archiveCall={() => {
                       handleArchiveCall(index);
                     }}
@@ -93,6 +100,13 @@ function App() {
         </div>
         {/* <Footer/> */}
       </div>
+      <button
+        onClick={() => {
+          console.log(showCards, showArchived, "inspecting...");
+        }}
+      >
+        Inspect
+      </button>
     </div>
   );
 }

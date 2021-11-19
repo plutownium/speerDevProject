@@ -1,4 +1,8 @@
-export function getAll(setCards) {
+export function getAll(setCards, setShowCards) {
+  // setCards: sets the card data into state mgmt
+  // setShowCards handles processing is_archived into client side mgmt of archival state.
+  // why not just handle it from setCards you ask? because changing the value of the is_archived key is too difficult
+  // while its in state. If I'm wrong & its a simple job please show me...
   const url = "https://aircall-job.herokuapp.com/activities";
   fetch(url, {
     method: "get",
@@ -13,6 +17,19 @@ export function getAll(setCards) {
     })
     .then((data) => {
       console.log(9, data);
+      console.log("here is the ccard data from api...", data);
+      let cardsToShow = [];
+      for (let i = 0; i < data.length; i++) {
+        let cardIsArchivedAlready = data[i].is_archived;
+        console.log(data[i], data[i].is_archived, "24");
+        if (cardIsArchivedAlready) {
+          // ... nothing because we don't want to show this card (explicit > implicit for readability)
+        } else {
+          cardsToShow.push(i.toString());
+        }
+      }
+      console.log("settig cards to show...", cardsToShow);
+      setShowCards(cardsToShow);
       setCards(data);
     })
     .catch((err) => {
@@ -52,7 +69,10 @@ export function updateById(id) {
     });
 }
 
-export function resetAll(setCards, resetShowCards) {
+export function resetAll(setCards, setShowCards) {
+  // setCards && setShowCards is passed thru into the next function.
+
+  // note if the challenge was to keep backend & client side archival state in alignment, I would've done that.
   const url = "https://aircall-job.herokuapp.com/reset";
   fetch(url, {
     method: "get",
@@ -66,7 +86,7 @@ export function resetAll(setCards, resetShowCards) {
       return success.json();
     })
     .then((data) => {
-      getAll(setCards);
+      getAll(setCards, setShowCards);
     })
     .catch((err) => {
       console.log(err);
