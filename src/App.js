@@ -24,11 +24,12 @@ function App() {
 
   function handleArchiveCall(item) {
     // inputs like "1", "4", "6"
-    console.log("REMOVING card...", item);
+    console.log(27, "REMOVING card...", item);
     var index = showCards.indexOf(item);
     if (index !== -1) {
-      showCards.splice(item, 1);
+      showCards.splice(index, 1);
     }
+    console.log(32, showCards);
     setShowCards(showCards);
   }
 
@@ -81,17 +82,17 @@ function App() {
           {cards
             ? cards.map((card, index) => {
                 let cardIsToBeShown = !showCards.includes(index.toString());
-                console.log(75, index, "archived:", cardIsToBeShown);
+                console.log(75, "archived:", cardIsToBeShown, index, showCards);
                 return (
                   <Card
-                    key={index}
+                    key={cards.indexOf(card)}
                     created_at={card.created_at}
                     number={card.from}
                     recipient={card.from}
                     archiveCall={(index) => {
                       handleArchiveCall(index);
                     }}
-                    id={index.toString()}
+                    id={cards.indexOf(card)}
                     archived={cardIsToBeShown}
                     showAllState={showArchived}
                   />
