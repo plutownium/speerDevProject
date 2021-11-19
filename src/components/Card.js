@@ -11,21 +11,27 @@ import Phone from "../img/phone.png";
 import "./Card.css";
 
 function Card({
+  id,
   created_at,
   number,
   recipient,
-  archived,
+  isArchived,
   archiveCall,
-  id,
   showAllState,
 }) {
-  // const [removed, setRemoved] = useState(false);
-  console.log(24, archived, showAllState);
+  let archivalClassAdded = false;
+  if (showAllState) {
+    archivalClassAdded = true;
+  }
+  if (isArchived) {
+    archivalClassAdded = true;
+  }
+  console.log(archivalClassAdded, showAllState, isArchived, 2222222222222);
+
   let date = created_at.split("T")[0];
   let timeCodeAs24HrClock = convertToMilitaryTime(created_at); // no bug at this point
   let timeCode = convertTwentyFourHourClockToTwelveHour(timeCodeAs24HrClock);
   // console.log(9, date, timeCode);
-  let archivalClassAdded = showAllState ? true : archived ? true : false;
   // let archivalClassAdded = false;
   return (
     <div
@@ -51,16 +57,14 @@ function Card({
       <div
         className="roundedBorderHighlight infoContainer flexSpaceBetween"
         onClick={() => {
-          console.log("removing id", id);
-          archiveCall(id.toString());
-          // followUpCall(); // fixme: remove this prolly
+          let idToRemove = id.toString();
+          archiveCall(idToRemove); // this block is fine
         }}
       >
         <div className="flexBoxStandard infoContainerInner flexSpaceBetween">
           <div className="leftContainer width100">
             <div className="iconContainer">
               <img src={Phone} alt="phone" className="icon" />
-              {/* <img src={} alt="phone" /> */}
             </div>
             <div className="width100">
               <div>
@@ -81,6 +85,19 @@ function Card({
           </div>
         </div>
       </div>
+      <button
+        onClick={() => {
+          console.log(
+            "inspecting...",
+            isArchived,
+            archiveCall,
+            id,
+            showAllState
+          );
+        }}
+      >
+        Inspect
+      </button>
     </div>
   );
 }

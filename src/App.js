@@ -13,7 +13,7 @@ import "./App.css";
 function App() {
   const [cards, setCards] = useState([]);
   const [showCardsByStringInt, setShowCardsByStringInt] = useState([]); // showing arr of indexes as strings.
-  const [showArchived, setShowArchived] = useState(false);
+  const [showAllArchived, setShowAllArchived] = useState(false);
 
   const location = useLocation();
 
@@ -24,6 +24,7 @@ function App() {
 
   function handleArchiveCall(item) {
     // inputs like "1", "4", "6"
+    // THIS WORKS.
     console.log(27, "REMOVING card...", item);
     var index = showCardsByStringInt.indexOf(item);
     if (index !== -1) {
@@ -43,8 +44,8 @@ function App() {
             <div
               onClick={() => {
                 document.title = "Inbox";
-                setShowArchived(false);
-                console.log(showArchived, false, cards);
+                setShowAllArchived(false);
+                console.log(showAllArchived, false, cards);
                 // resetStates() // fixme: reset all Removed cards to nonRemoved after click Inbox
               }}
             >
@@ -53,8 +54,8 @@ function App() {
             <div
               onClick={() => {
                 document.title = "All Calls";
-                setShowArchived(true);
-                console.log(showArchived, true, cards, showArchived);
+                setShowAllArchived(true);
+                console.log(showAllArchived, true, cards);
               }}
             >
               <p className="headerText silentGreyText">All calls</p>
@@ -81,16 +82,17 @@ function App() {
         <div className="container-view">
           {cards
             ? cards.map((card, index) => {
-                let cardIsToBeShown = !showCardsByStringInt.includes(
+                let cardHasBeenArchived = !showCardsByStringInt.includes(
                   index.toString()
                 );
+
                 console.log(
-                  75,
-                  "archived:",
-                  cardIsToBeShown,
+                  showCardsByStringInt,
                   index,
-                  showCardsByStringInt
+                  cardHasBeenArchived,
+                  9898989898
                 );
+
                 return (
                   <Card
                     key={cards.indexOf(card)}
@@ -101,8 +103,8 @@ function App() {
                       handleArchiveCall(index);
                     }}
                     id={cards.indexOf(card)}
-                    archived={cardIsToBeShown}
-                    showAllState={showArchived}
+                    isArchived={cardHasBeenArchived}
+                    showAllState={showAllArchived}
                   />
                 );
               })
@@ -110,13 +112,6 @@ function App() {
         </div>
         {/* <Footer/> */}
       </div>
-      <button
-        onClick={() => {
-          console.log(showCardsByStringInt, showArchived, "inspecting...");
-        }}
-      >
-        Inspect
-      </button>
     </div>
   );
 }

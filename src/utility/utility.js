@@ -17,21 +17,21 @@ export function getAll(setCards, showCardsByStringInt) {
     })
     .then((data) => {
       console.log(9, data);
-      console.log("###########################");
-      console.log("here is the ccard data from api...", data);
+      // console.log("###########################");
+      // console.log("here is the ccard data from api...", data);
       let cardsToShow = [];
       for (let i = 0; i < data.length; i++) {
         let cardIsArchivedAlready = data[i].is_archived;
-        console.log(data[i].from, data[i].is_archived, "24");
+        // console.log(data[i].from, data[i].is_archived, "24");
         if (cardIsArchivedAlready) {
           // ... nothing because we don't want to show this card (explicit > implicit for readability)
         } else {
           cardsToShow.push(i.toString());
         }
       }
-      console.log("settig cards to show...", cardsToShow); // correct state shown
+      // console.log("settig cards to show...", cardsToShow); // correct state shown
       showCardsByStringInt(cardsToShow); // should only be onPageLoad
-      console.log("###########################");
+      // console.log("###########################");
       setCards(data);
     })
     .catch((err) => {
