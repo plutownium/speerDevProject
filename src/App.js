@@ -12,25 +12,25 @@ import "./App.css";
 
 function App() {
   const [cards, setCards] = useState([]);
-  const [showCards, setShowCards] = useState([]); // showing arr of indexes as strings.
+  const [showCardsByStringInt, setShowCardsByStringInt] = useState([]); // showing arr of indexes as strings.
   const [showArchived, setShowArchived] = useState(false);
 
   const location = useLocation();
 
   useEffect(() => {
     document.title = "Inbox";
-    resetAll(setCards, setShowCards);
+    resetAll(setCards, setShowCardsByStringInt);
   }, [location]);
 
   function handleArchiveCall(item) {
     // inputs like "1", "4", "6"
     console.log(27, "REMOVING card...", item);
-    var index = showCards.indexOf(item);
+    var index = showCardsByStringInt.indexOf(item);
     if (index !== -1) {
-      showCards.splice(index, 1);
+      showCardsByStringInt.splice(index, 1);
     }
-    console.log(32, showCards);
-    setShowCards(showCards);
+    console.log(32, showCardsByStringInt);
+    setShowCardsByStringInt(showCardsByStringInt);
   }
 
   return (
@@ -81,8 +81,16 @@ function App() {
         <div className="container-view">
           {cards
             ? cards.map((card, index) => {
-                let cardIsToBeShown = !showCards.includes(index.toString());
-                console.log(75, "archived:", cardIsToBeShown, index, showCards);
+                let cardIsToBeShown = !showCardsByStringInt.includes(
+                  index.toString()
+                );
+                console.log(
+                  75,
+                  "archived:",
+                  cardIsToBeShown,
+                  index,
+                  showCardsByStringInt
+                );
                 return (
                   <Card
                     key={cards.indexOf(card)}
@@ -104,7 +112,7 @@ function App() {
       </div>
       <button
         onClick={() => {
-          console.log(showCards, showArchived, "inspecting...");
+          console.log(showCardsByStringInt, showArchived, "inspecting...");
         }}
       >
         Inspect

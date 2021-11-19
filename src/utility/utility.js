@@ -1,6 +1,6 @@
-export function getAll(setCards, setShowCards) {
+export function getAll(setCards, showCardsByStringInt) {
   // setCards: sets the card data into state mgmt
-  // setShowCards handles processing is_archived into client side mgmt of archival state.
+  // showCardsByStringInt handles processing is_archived into client side mgmt of archival state.
   // why not just handle it from setCards you ask? because changing the value of the is_archived key is too difficult
   // while its in state. If I'm wrong & its a simple job please show me...
   const url = "https://aircall-job.herokuapp.com/activities";
@@ -30,7 +30,7 @@ export function getAll(setCards, setShowCards) {
         }
       }
       console.log("settig cards to show...", cardsToShow); // correct state shown
-      setShowCards(cardsToShow); // should only be onPageLoad
+      showCardsByStringInt(cardsToShow); // should only be onPageLoad
       console.log("###########################");
       setCards(data);
     })
@@ -71,7 +71,7 @@ export function updateById(id) {
     });
 }
 
-export function resetAll(setCards, setShowCards) {
+export function resetAll(setCards, setShowCardsByStringInt) {
   // setCards && setShowCards is passed thru into the next function.
 
   // note if the challenge was to keep backend & client side archival state in alignment, I would've done that.
@@ -88,7 +88,7 @@ export function resetAll(setCards, setShowCards) {
       return success.json();
     })
     .then((data) => {
-      getAll(setCards, setShowCards);
+      getAll(setCards, setShowCardsByStringInt);
     })
     .catch((err) => {
       console.log(err);
