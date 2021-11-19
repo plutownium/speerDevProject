@@ -18,12 +18,13 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    location.pathname = "Inbox";
+    document.title = "Inbox";
     resetAll(setCards, setShowCards);
-  }, []);
+  }, [location]);
 
   function handleArchiveCall(item) {
     // inputs like "1", "4", "6"
+    console.log("REMOVING card...", item);
     var index = showCards.indexOf(item);
     if (index !== -1) {
       showCards.splice(item, 1);
@@ -40,7 +41,7 @@ function App() {
             <div>{/* intentionally blank */}</div>
             <div
               onClick={() => {
-                location.pathname = "Inbox";
+                document.title = "Inbox";
                 setShowArchived(false);
                 console.log(showArchived, false, cards);
                 // resetStates() // fixme: reset all Removed cards to nonRemoved after click Inbox
@@ -50,7 +51,7 @@ function App() {
             </div>
             <div
               onClick={() => {
-                location.pathname = "All Calls";
+                document.title = "All Calls";
                 setShowArchived(true);
                 console.log(showArchived, true, cards, showArchived);
               }}
@@ -87,13 +88,10 @@ function App() {
                     created_at={card.created_at}
                     number={card.from}
                     recipient={card.from}
-                    archiveCall={() => {
+                    archiveCall={(index) => {
                       handleArchiveCall(index);
                     }}
-                    id={card.id}
-                    followUpCall={() => {
-                      getAll(setCards);
-                    }}
+                    id={index.toString()}
                     archived={cardIsToBeShown}
                     showAllState={showArchived}
                   />
