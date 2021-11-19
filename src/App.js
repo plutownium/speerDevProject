@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import { useLocation } from "react-router-dom";
+
 import { getAll, getById, updateById, resetAll } from "./utility/utility";
 
 import Options from "./img/options.webp";
@@ -13,7 +15,10 @@ function App() {
   const [showCards, setShowCards] = useState([]); // showing arr of indexes as strings.
   const [showArchived, setShowArchived] = useState(false);
 
+  const location = useLocation();
+
   useEffect(() => {
+    location.pathname = "Inbox";
     resetAll(setCards, setShowCards);
   }, []);
 
@@ -35,6 +40,7 @@ function App() {
             <div>{/* intentionally blank */}</div>
             <div
               onClick={() => {
+                location.pathname = "Inbox";
                 setShowArchived(false);
                 console.log(showArchived, false, cards);
                 // resetStates() // fixme: reset all Removed cards to nonRemoved after click Inbox
@@ -44,6 +50,7 @@ function App() {
             </div>
             <div
               onClick={() => {
+                location.pathname = "All Calls";
                 setShowArchived(true);
                 console.log(showArchived, true, cards, showArchived);
               }}
