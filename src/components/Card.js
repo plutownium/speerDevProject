@@ -25,7 +25,7 @@ function Card({
   let timeCodeAs24HrClock = convertToMilitaryTime(created_at); // no bug at this point
   let timeCode = convertTwentyFourHourClockToTwelveHour(timeCodeAs24HrClock);
   // console.log(9, date, timeCode);
-  let archivalClassAdded = showAllState ? true : archived ? true : false;
+  let archivalClassAdded = showAllState ? false : archived ? true : false;
   // let archivalClassAdded = false;
   return (
     <div

@@ -1,8 +1,4 @@
-export function getAll(setCards, showCardsByStringInt) {
-  // setCards: sets the card data into state mgmt
-  // showCardsByStringInt handles processing is_archived into client side mgmt of archival state.
-  // why not just handle it from setCards you ask? because changing the value of the is_archived key is too difficult
-  // while its in state. If I'm wrong & its a simple job please show me...
+export function getAll() {
   const url = "https://aircall-job.herokuapp.com/activities";
   fetch(url, {
     method: "get",
@@ -16,22 +12,6 @@ export function getAll(setCards, showCardsByStringInt) {
       return success.json();
     })
     .then((data) => {
-      console.log(9, data);
-      console.log("###########################");
-      console.log("here is the ccard data from api...", data);
-      let cardsToShow = [];
-      for (let i = 0; i < data.length; i++) {
-        let cardIsArchivedAlready = data[i].is_archived;
-        console.log(data[i].from, data[i].is_archived, "24");
-        if (cardIsArchivedAlready) {
-          // ... nothing because we don't want to show this card (explicit > implicit for readability)
-        } else {
-          cardsToShow.push(i.toString());
-        }
-      }
-      console.log("settig cards to show...", cardsToShow); // correct state shown
-      showCardsByStringInt(cardsToShow); // should only be onPageLoad
-      console.log("###########################");
       setCards(data);
     })
     .catch((err) => {
@@ -88,7 +68,7 @@ export function resetAll(setCards, setShowCardsByStringInt) {
       return success.json();
     })
     .then((data) => {
-      getAll(setCards, setShowCardsByStringInt);
+      getAll();
     })
     .catch((err) => {
       console.log(err);
