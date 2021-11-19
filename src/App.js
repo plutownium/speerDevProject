@@ -72,19 +72,14 @@ function App() {
         <div className="container-view">
           {cards
             ? cards.map((card, index) => {
-                console.log(
-                  75,
-                  index,
-                  "archived:",
-                  showCards.includes(index.toString())
-                );
+                let cardIsToBeShown = !showCards.includes(index.toString());
+                console.log(75, index, "archived:", cardIsToBeShown);
                 return (
                   <Card
                     key={index}
                     created_at={card.created_at}
                     number={card.from}
                     recipient={card.from}
-                    archived={showCards.includes(index.toString())}
                     archiveCall={() => {
                       handleArchiveCall(index);
                     }}
@@ -92,6 +87,7 @@ function App() {
                     followUpCall={() => {
                       getAll(setCards);
                     }}
+                    archived={cardIsToBeShown}
                     showAllState={showArchived}
                   />
                 );

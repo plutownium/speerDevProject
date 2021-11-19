@@ -21,16 +21,17 @@ function Card({
   showAllState,
 }) {
   const [removed, setRemoved] = useState(false);
-  console.log(24);
+  console.log(24, archived, showAllState);
   let date = created_at.split("T")[0];
   let timeCodeAs24HrClock = convertToMilitaryTime(created_at); // no bug at this point
   let timeCode = convertTwentyFourHourClockToTwelveHour(timeCodeAs24HrClock);
   // console.log(9, date, timeCode);
+  let archivalClassAdded = showAllState ? true : archived ? true : false;
   return (
     <div
       className={`cardMainContainer ${
-        showAllState ? "null" : archived ? "hideBecauseArchived" : ""
-      } ${removed ? "hideBecauseArchived" : ""}`}
+        archivalClassAdded ? "hideBecauseArchived" : null
+      }`}
     >
       <div className="cardHeaderContainer">
         <div className="headerInnerContainer flexPlainCenter">

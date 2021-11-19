@@ -28,7 +28,7 @@ export function getAll(setCards, setShowCards) {
           cardsToShow.push(i.toString());
         }
       }
-      console.log("settig cards to show...", cardsToShow);
+      console.log("settig cards to show...", cardsToShow); // correct state shown
       setShowCards(cardsToShow);
       setCards(data);
     })
